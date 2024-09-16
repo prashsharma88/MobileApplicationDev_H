@@ -6,17 +6,41 @@ import {
 } from "react-native";
 
 
+// Every UI component in react/react-native receive a object named 'prop'
+// This 'prop' object can be used to pass initialization values to the UI component
 
-function SimpleCard():React.JSX.Element {
+
+// Defining the prop type using a type object. This is usefull for complex props.
+type simpleCardProp ={
+    title : string,
+    txt : string,
+}
+
+// function SimpleCard(prop : simpleCardProp) : React.JSX.Element {
+
+// Another way of defining props, if you have simple props to define.
+// destructuring the prop object into individual attributes.
+function SimpleCard({title,txt} : {title: string, txt: string}) : React.JSX.Element {
+
+    // const titleTxt = prop.title;
+    // const cardTxt = prop.txt;
+
+    const titleTxt = title;
+    const cardTxt = txt;
+
     return (
         <View style={style.card}>
-            <Text style={style.cardTitle}>Card Title</Text>
+            {/* card title */}
+            <Text style={[style.cardTitle, style.txtColor]}>
+                {titleTxt}
+            </Text>
+
+            {/* divider */}
             <View style={style.div}></View>
-            <Text style={style.cardTxt} numberOfLines={7}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Quia omnis veniam eos dicta aspernatur quas nam pariatur accusamus esse, 
-                error molestias reprehenderit neque, hic, ullam repudiandae atque quaerat 
-                delectus illo.
+
+            {/* card text */}
+            <Text style={[style.cardTxt, style.txtColor]} numberOfLines={7}>
+                {cardTxt}
             </Text>
         </View>
     );
@@ -35,7 +59,6 @@ const style = StyleSheet.create({
     },
 
     cardTitle: {
-        color: '#FFF',
         fontSize: 25,
         fontWeight: '600',
         height: 40,
@@ -50,9 +73,12 @@ const style = StyleSheet.create({
 
     cardTxt: {
         fontSize: 20,
-        color: '#FFF',
         height: 178,
     },
+
+    txtColor: {
+        color: '#FFF',
+    }
 });
 
 export default SimpleCard;

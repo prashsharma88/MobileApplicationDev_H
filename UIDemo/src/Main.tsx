@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import AppHeader from "./components/AppHeader";
 import SimpleCard from "./components/SimpleCard";
+import RichCard from "./components/RichCard";
 
 
 function Main() : React.JSX.Element {
@@ -16,10 +17,17 @@ function Main() : React.JSX.Element {
                 <AppHeader />
             </View>
             <View>
+                <ScrollView horizontal>
+                    <SimpleCard title="Card 1" txt="Card text for first card" />
+                    <SimpleCard title="Card 2" txt="Card text for second card"/>
+                    <SimpleCard title="Card 3" txt="Card text for third card" />
+                    <SimpleCard title="Card 4" txt="Card text for fourth card" />
+                    <SimpleCard title="Card 5" txt="Card text for fifth card" />
+                    <SimpleCard title="Card 6" txt="Card text for sixth card" />
+                </ScrollView>
 
-            <SimpleCard />
-
-
+                {/* Rich card */}
+                <RichCard />
                 
             </View>
         </SafeAreaView>
