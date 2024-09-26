@@ -16,10 +16,15 @@ function TxtInput(props : txtInputProps) : React.JSX.Element {
     const placeHolderTxt = props.placeHolder;
     const isPassword = props.isPassword;
 
+    // instead of managing the plain text and * string, which is very complex,
+    // we can use secureTextEntry attribute of TextInput and a simple state to manage string
     const [inputValue, setInputValue] = useState({
         actualValue : "",
         displayValue: "",
     });
+
+    // Simple string in useState hook.
+    const [inVal, setInVal] = useState("");
 
     function onTxtChanged(newTxt : string) {
         // console.log(inputValue.actualValue);
@@ -40,14 +45,16 @@ function TxtInput(props : txtInputProps) : React.JSX.Element {
         }
     }
 
-    console.log(inputValue.actualValue);
+    console.log(inVal);
     return (
         <View>
             <TextInput 
             style={style.txtInputView}
             placeholder={placeHolderTxt}
-            value={inputValue.displayValue}
-            onChangeText={onTxtChanged}
+            value={inVal}
+            onChangeText={setInVal}
+            // using secureTextEntry attribute of TextInput component.
+            secureTextEntry={isPassword}
             />
         </View>
     );
