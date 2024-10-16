@@ -7,12 +7,34 @@ import {
 } from "react-native";
 import { CommonStyles } from "../utility/Styles";
 
+type ScoreCardPropType = {
+    playerName : string,
+    maxScore : number,
+    currentScore : number,
+    setScore : Array<number>,
+    updateCurrentScore : (val : number) => void;
+};
 
-function ScoreCard() : React.JSX.Element {
-    const playerName = "Max";
-    const setScore = [10,20,30];
-    let currentScore = 9;
-    let isWinner = true;
+function ScoreCard( props : ScoreCardPropType) : React.JSX.Element {
+    const playerName = props.playerName;
+    const setScore = props.setScore;
+    const maxScore = props.maxScore;
+    const currentScore = props.currentScore;
+    let isWinner = currentScore >=maxScore ? true : false ;
+    const updateCurrentScore = props.updateCurrentScore;
+
+
+    function handleIncrementDecrement(op : number) {
+        if(op > 0) {
+            // increase current score
+            if(currentScore < maxScore) 
+                updateCurrentScore(currentScore+1);
+        } else {
+            // decrease current score
+            if(currentScore>0) 
+                updateCurrentScore(currentScore-1);
+        }
+    }
 
     return (
         <View style={[CommonStyles.border, styles.center]}>
@@ -40,12 +62,18 @@ function ScoreCard() : React.JSX.Element {
             <View style={[styles.horizontalView, styles.btnView]}>
                 <TouchableOpacity
                 style={[CommonStyles.border, CommonStyles.btn]}
-                onPress={() => {console.log("Submit Pressed")}}>
+                onPress={() => {
+                    console.log("Submit Pressed");
+                    handleIncrementDecrement(-1)
+                    }}>
                     <Text style={CommonStyles.txt}>-</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={[CommonStyles.border, CommonStyles.btn]}
-                onPress={() => {console.log("Submit Pressed")}}>
+                onPress={() => {
+                    console.log("Submit Pressed");
+                    handleIncrementDecrement(1)
+                    }}>
                     <Text style={CommonStyles.txt}>+</Text>
                 </TouchableOpacity>
             </View>
