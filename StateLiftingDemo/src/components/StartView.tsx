@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { CommonStyles } from "../utility/Styles";
-import { gameStateValues } from "../Main";
+import { gameStateValues } from "../utility/utils";
 
 type StartViewPropType = {
     changeStateFunction : (state : gameStateValues) => void,

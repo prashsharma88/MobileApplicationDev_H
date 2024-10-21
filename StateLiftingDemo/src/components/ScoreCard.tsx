@@ -12,7 +12,8 @@ type ScoreCardPropType = {
     maxScore : number,
     currentScore : number,
     setScore : Array<number>,
-    updateCurrentScore : (val : number) => void;
+    updateCurrentScore : (val : number) => void,
+    handleWinner : () => void,
 };
 
 function ScoreCard( props : ScoreCardPropType) : React.JSX.Element {
@@ -22,6 +23,7 @@ function ScoreCard( props : ScoreCardPropType) : React.JSX.Element {
     const currentScore = props.currentScore;
     let isWinner = currentScore >=maxScore ? true : false ;
     const updateCurrentScore = props.updateCurrentScore;
+    const handleWinner = props.handleWinner;
 
 
     function handleIncrementDecrement(op : number) {
@@ -88,7 +90,10 @@ function ScoreCard( props : ScoreCardPropType) : React.JSX.Element {
                         }
                     ]
                 }
-                onPress={() => {console.log("Submit Pressed")}}>
+                onPress={() => {
+                    console.log("Winner btn pressed")
+                    handleWinner();
+                    }}>
                     <Text style={CommonStyles.txt}>Winner</Text>
             </TouchableOpacity>
         </View>

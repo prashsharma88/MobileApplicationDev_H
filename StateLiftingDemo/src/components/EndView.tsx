@@ -6,15 +6,25 @@ import {
     StyleSheet,
 } from "react-native";
 import { CommonStyles } from "../utility/Styles";
+import { gameStateValues } from "../utility/utils";
 
-function EndView() : React.JSX.Element {
-    const winnerName = "Max";
+type endViewPropsType = {
+    winnerName : string,
+    updateGameState : (val : gameStateValues) => void,
+};
+
+function EndView(props : endViewPropsType) : React.JSX.Element {
+    const winnerName = props.winnerName;
+    const updateGameState = props.updateGameState;
     return (
         <View>
             <Text style={CommonStyles.txt}>
                 Winner is {winnerName}!!!
             </Text>
-            <TouchableOpacity style={CommonStyles.border}>
+            <TouchableOpacity 
+            style={CommonStyles.border}
+            onPress={() => updateGameState(gameStateValues.INIT)}
+            >
                 <Text style={CommonStyles.txt}>Restart</Text>
             </TouchableOpacity>
         </View>

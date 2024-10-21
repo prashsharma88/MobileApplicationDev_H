@@ -7,11 +7,16 @@ import StartView from "./components/StartView";
 import PlayView from "./components/PlayView";
 import EndView from "./components/EndView";
 
-export enum gameStateValues {
-    INIT = 0,
-    PLAY,
-    END,
-};
+import { gameStateValues } from "./utility/utils";
+
+
+// Move this enum to utils.ts file to fix curcular dependency issue. Import gameStateValues from ./utility/utils file
+
+// export enum gameStateValues {
+//     INIT = 0,
+//     PLAY,
+//     END,
+// };
 
 function Main() : React.JSX.Element {
     const [GameState, UpdateGameState] = useState(gameStateValues.INIT);
@@ -20,10 +25,25 @@ function Main() : React.JSX.Element {
     const [P2Name, setP2Name] = useState("");
     const [MaxScore, setMaxScore] = useState(0);
 
+    // created state to keep track of winner name.
+    const [gameWinner, setGameWinner] = useState("");
+
     const Screens : Array<React.JSX.Element> = [
-        <StartView changeStateFunction={handleGameStateChange} handleFormData={handleDataFromStartForm}/>, 
-        <PlayView P1Name={P1Name} P2Name={P2Name} MaxScore={MaxScore} />, 
-        <EndView />
+        <StartView 
+        changeStateFunction={handleGameStateChange} 
+        handleFormData={handleDataFromStartForm}
+        />, 
+        <PlayView 
+        P1Name={P1Name} 
+        P2Name={P2Name} 
+        MaxScore={MaxScore} 
+        setWinnerName={setGameWinner} 
+        updateGameState={handleGameStateChange}
+        />, 
+        <EndView 
+        winnerName={gameWinner} 
+        updateGameState={handleGameStateChange} 
+        />
     ];
 
     function handleGameStateChange(state : gameStateValues) {
