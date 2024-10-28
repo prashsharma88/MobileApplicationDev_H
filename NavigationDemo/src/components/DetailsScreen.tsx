@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
     StyleSheet,
+    TouchableOpacity,
 } from "react-native";
 import Btn from "./Btn";
 
@@ -10,6 +11,37 @@ function DetailScreen({route, navigation} : {route : any, navigation : any}) : R
 
     const descText = route.params.desc;
     const itemId = route.params.itemId;
+
+    const [count, updateCount] = useState(0);
+
+    // What is useEffect hook and when should we use it ?
+    // How is it different form useState hook?
+    // takes 2 parameters,
+    // first is effect function.
+    // second is dependency array.
+    // dependency array tells the hook when to call the effect function.
+
+    useEffect(()=> {
+        // do synchronization with external system.
+        navigation.setOptions({
+            headerRight: () => {
+                return (
+                    <TouchableOpacity
+                    onPress={()=> updateCount(count+1)}
+                    >
+                        <Text style={{
+                            fontSize: 25,
+                            fontWeight: '400',
+                            color: '#FFF',
+                        }}> + </Text>
+                    </TouchableOpacity>
+                );
+            }
+        });
+    }, [count]);
+    
+
+    
 
     return (
         <View>
@@ -31,6 +63,11 @@ function DetailScreen({route, navigation} : {route : any, navigation : any}) : R
             }} />
 
             <Text style={styles.txt}>{descText}</Text>
+
+
+            <View>
+                <Text style={[styles.txt, {fontSize: 25, color: 'orange'}]}>Current Value is : {count}</Text>
+            </View>
         </View>
     );
 }
