@@ -5,6 +5,7 @@
 import {AppRegistry} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
-import Main from './src/Main';
+import Main from './tabNavigationDemo_src/navigation/TabNavigation_Main';
+// import Main from './src/Main';
 
 AppRegistry.registerComponent(appName, () => Main);
