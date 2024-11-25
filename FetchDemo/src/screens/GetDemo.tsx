@@ -8,6 +8,7 @@ import {
     ActivityIndicator,
 } from "react-native";
 import MyBtn from "../components/MyBtn";
+import AppLayout from "../layout/AppLayout";
 
 
 type Post = {
@@ -69,45 +70,47 @@ function GetDemo() : React.JSX.Element {
 
 
     return(
-        <View>
-            <Text style={style.screenTitle}>Get Demo</Text>
-            {/* Refresh Button */}
-            <MyBtn title="Refresh" onPress={() => {
-                console.log("Refresh UI");
-                updateRefreshCount(refreshCount+1);
-                setLoading(true);
-            }} />
+        <AppLayout>
+            <View>
+                <Text style={style.screenTitle}>Get Demo</Text>
+                {/* Refresh Button */}
+                <MyBtn title="Refresh" onPress={() => {
+                    console.log("Refresh UI");
+                    updateRefreshCount(refreshCount+1);
+                    setLoading(true);
+                }} />
 
-            { 
-                loading ? 
-                <ActivityIndicator size='large' /> 
-                : 
-                <FlatList 
-                data={PostData}
-                keyExtractor={item => item.id+""}
-                renderItem={({item}) => (
-                    <View style={style.PostView}>
-                        <Text style={style.titleTxt}>{item.id} : {item.title}</Text>
-                        <Text style={style.bodyTxt}>{item.body}</Text>
-                    </View>
-                )}
-                />
-            }
-
-
-            {/* <ScrollView>
-                {
-                PostData.map((post) => (
-                    <View key={post.id}>
-                        <Text>{post.id} : {post.title}</Text>
-                        
-                        <Text>{post.body}</Text>
-                    </View>
-                    ))
+                { 
+                    loading ? 
+                    <ActivityIndicator size='large' /> 
+                    : 
+                    <FlatList 
+                    data={PostData}
+                    keyExtractor={item => item.id+""}
+                    renderItem={({item}) => (
+                        <View style={style.PostView}>
+                            <Text style={style.titleTxt}>{item.id} : {item.title}</Text>
+                            <Text style={style.bodyTxt}>{item.body}</Text>
+                        </View>
+                    )}
+                    />
                 }
-            </ScrollView> */}
-            
-        </View>
+
+
+                {/* <ScrollView>
+                    {
+                    PostData.map((post) => (
+                        <View key={post.id}>
+                            <Text>{post.id} : {post.title}</Text>
+                            
+                            <Text>{post.body}</Text>
+                        </View>
+                        ))
+                    }
+                </ScrollView> */}
+                
+            </View>
+        </AppLayout>
     );
 }
 

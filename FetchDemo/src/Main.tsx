@@ -6,8 +6,8 @@ import PostDemo from "./screens/PostDemo";
 
 function Main() : React.JSX.Element {
     return (
-        // <GetDemo />
-        <PostDemo />
+        <GetDemo />
+        // <PostDemo />
     );
 }
 

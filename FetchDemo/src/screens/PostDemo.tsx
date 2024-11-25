@@ -7,6 +7,7 @@ import {
     TextInput,
 } from "react-native";
 import MyBtn from "../components/MyBtn";
+import AppLayout from "../layout/AppLayout";
 
 
 function PostDemo() : React.JSX.Element {
@@ -40,58 +41,60 @@ function PostDemo() : React.JSX.Element {
     }
 
     return (
-        <View>
-            {/* Implement the form here */}
-
-            <TextInput 
-            maxLength={50}
-            numberOfLines={2}
-            value={titleTxt}
-            onChangeText={setTitleTxt}
-            style={style.inputTxtArea}
-            placeholder="Title"
-            />
-
-            <TextInput 
-            maxLength={50}
-            numberOfLines={4}
-            value={bodyTxt}
-            onChangeText={setbodyTxt}
-            style={style.inputTxtArea}
-            placeholder="Body"
-            />
-
-            <MyBtn title="Submit" onPress={() => {
-                console.log("Submit Data");
-                PostData();
-            }} />
-
-            {/* {loading == false ? 
+        <AppLayout>
             <View>
-                <Text
-                style={[style.responseTxt, {color: postResponseStauts?'green':'red'}]}
-                >Request {postResponseStauts ? "Completed" : "Failed"}</Text>
-            </View> 
-            :
-            <View>
-            </View>
-            } */}
+                {/* Implement the form here */}
 
-            <View style={{display: loading==true? 'none':'flex'}}>
-                <Text
-                style={[style.responseTxt, {color: postResponseStauts?'green':'red'}]}
-                >Request {postResponseStauts ? "Completed" : "Failed"}</Text>
-            </View> 
+                <TextInput 
+                maxLength={50}
+                numberOfLines={2}
+                value={titleTxt}
+                onChangeText={setTitleTxt}
+                style={style.inputTxtArea}
+                placeholder="Title"
+                />
 
-            {loading == false &&
+                <TextInput 
+                maxLength={50}
+                numberOfLines={4}
+                value={bodyTxt}
+                onChangeText={setbodyTxt}
+                style={style.inputTxtArea}
+                placeholder="Body"
+                />
+
+                <MyBtn title="Submit" onPress={() => {
+                    console.log("Submit Data");
+                    PostData();
+                }} />
+
+                {/* {loading == false ? 
                 <View>
                     <Text
                     style={[style.responseTxt, {color: postResponseStauts?'green':'red'}]}
                     >Request {postResponseStauts ? "Completed" : "Failed"}</Text>
                 </View> 
+                :
+                <View>
+                </View>
+                } */}
 
-            }
-        </View>
+                <View style={{display: loading==true? 'none':'flex'}}>
+                    <Text
+                    style={[style.responseTxt, {color: postResponseStauts?'green':'red'}]}
+                    >Request {postResponseStauts ? "Completed" : "Failed"}</Text>
+                </View> 
+
+                {loading == false &&
+                    <View>
+                        <Text
+                        style={[style.responseTxt, {color: postResponseStauts?'green':'red'}]}
+                        >Request {postResponseStauts ? "Completed" : "Failed"}</Text>
+                    </View> 
+
+                }
+            </View>
+        </AppLayout>
     );
 }
 
